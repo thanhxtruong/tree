@@ -6,7 +6,7 @@
 var particles = [];
 var width;
 var height;
-var numberOfParticles = 5;
+var numberOfParticles = 500;
 var forces = [];
 
 function setup() {
@@ -60,16 +60,13 @@ function draw() {
     }
 
     if (frameCount === 1) {
-      // var force = createVector(random(-1, 1), random(-1, 1));
-      particles[i].applyForce(forces[i]);
+      var force = createVector(random(-1, 1), random(-1, 1));
+      // particles[i].applyForce(forces[i]);
+      particles[i].applyForce(force);
     }
 
     particles[i].update(frameCount);
     particles[i].edges();
     particles[i].display();
   }
-}
-
-function onClicked() {
-  console.log('here');
 }

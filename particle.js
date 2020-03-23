@@ -13,7 +13,7 @@ function Particle(width, height) {
   this.applyForce = function(force) {
     // this.acc.set(0,0);
     this.acc.add(force);
-    this.acc.mult(3);
+    this.acc.mult(1);
   }
 
   this.update = function(frameCount) {
@@ -34,10 +34,10 @@ function Particle(width, height) {
     stroke(255);
     ellipse(this.pos.x, this.pos.y, 5, 5);
 
-    for (let i = 0; i < this.history.length; i++) {
-      fill(255, 150);
-      ellipse(this.history[i].x, this.history[i].y, 2, 2);
-    }
+    // for (let i = 0; i < this.history.length; i++) {
+    //   fill(255, 150);
+    //   ellipse(this.history[i].x, this.history[i].y, 2, 2);
+    // }
   }
 
   this.edges = function() {
@@ -47,28 +47,48 @@ function Particle(width, height) {
     //   this.bounces = 0;
     // }
 
-    if (this.pos.y > height && this.bounces < 4) {
+    // if (this.pos.y > height && this.bounces < 4) {
+    //   this.vel.y *= -1;
+    //   this.pos.y = height;
+    //   this.bounces += 1;
+    // }
+
+    // if (this.pos.x > width && this.bounces < 4) {
+    //   this.vel.x *= -1;
+    //   this.pos.x = width;
+    //   this.bounces += 1;
+    // }
+
+    // if (this.pos.y < 0 && this.bounces < 4) {
+    //   this.vel.y *= -1;
+    //   this.pos.y = 0;
+    //   this.bounces += 1;
+    // }
+
+    // if (this.pos.x < 0 && this.bounces < 4) {
+    //   this.vel.x *= -1;
+    //   this.pos.x = 0;
+    //   this.bounces += 1;
+    // }
+
+    if (this.pos.y > height) {
       this.vel.y *= -1;
       this.pos.y = height;
-      this.bounces += 1;
     }
 
-    if (this.pos.x > width && this.bounces < 4) {
+    if (this.pos.x > width) {
       this.vel.x *= -1;
       this.pos.x = width;
-      this.bounces += 1;
     }
 
-    if (this.pos.y < 0 && this.bounces < 4) {
+    if (this.pos.y < 0) {
       this.vel.y *= -1;
       this.pos.y = 0;
-      this.bounces += 1;
     }
 
-    if (this.pos.x < 0 && this.bounces < 4) {
+    if (this.pos.x < 0) {
       this.vel.x *= -1;
       this.pos.x = 0;
-      this.bounces += 1;
     }
     
   }
