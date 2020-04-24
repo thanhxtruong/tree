@@ -3,70 +3,26 @@
 // http://natureofcode.com/
 // Session 2: Array of Particles, multiple forces
 
-var particles = [];
-var width;
-var height;
-var numberOfParticles = 500;
-var forces = [];
+var inc = 0.01;
+var start = 0;
 
 function setup() {
-  width = 1000;
-  height = 1000;
-  createCanvas(width, height);
-  forces = [
-    createVector(0.5, 0.5),
-    createVector(-0.5, 0.5),
-    createVector(0.5, -0.5),
-    createVector(-0.5, -0.5),
-    createVector(0.5, 0.5),
-  ]
-  for (var i = 0; i < numberOfParticles; i++) {
-    var particle = new Particle(width, height);
-    particles.push(particle);
-  }
-  
-  
-  // for (var i = 0; i < numberOfParticles; i++) {
-  //   var particle = new Particle(random(0, width), random(0, height));
-  //   particles.push(particle);
-  // }
+  createCanvas(640, 360);
 }
 
-// function mousePressed() {
-//   var p = new Particle(mouseX, mouseY, random(2,4));
-//   particles.push(p);
-// }
-
-// function keyPressed() {
-//   if (key == ' ') {
-//     particles.splice(0, 1);
-//   }
-
-// }
-
 function draw() {
-  background(0);
+  background(51);
+  stroke(255);
+  translate(width/2, height);
+  branch(100);  
+}
 
-  for (var i = 0; i < particles.length; i++) {
-    
-    for (var j = i + 1; j < particles.length; j++) {
-      var length = p5.Vector.sub(particles[j].pos, particles[i].pos);
-      if (length.mag() < 40) {
-        var normalizedLength = map(length.mag(), 0, max(width, height), 1 , 0);
-        stroke(255);
-        strokeWeight(normalizedLength);
-        line(particles[i].pos.x, particles[i].pos.y, particles[j].pos.x, particles[j].pos.y);
-      }      
-    }
-
-    if (frameCount === 1) {
-      var force = createVector(random(-1, 1), random(-1, 1));
-      // particles[i].applyForce(forces[i]);
-      particles[i].applyForce(force);
-    }
-
-    particles[i].update(frameCount);
-    particles[i].edges();
-    particles[i].display();
+function branch(len) {
+  line(0, 0, 0, -len);
+  translate(0, -len);
+  rotate(PI / 4);
+  if (len > 4) {
+    branch(len * 0.67);
   }
+  // line(0, 0, 0, -len * 0.67);
 }
